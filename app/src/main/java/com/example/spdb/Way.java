@@ -2,13 +2,13 @@ package com.example.spdb;
 
 import org.osmdroid.util.GeoPoint;
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import androidx.annotation.NonNull;
 
-public class Way {
+public class Way implements Comparable<Way>{
     private Long id;
     private double distance;
     private List<GeoPoint> geoPoints;
@@ -71,4 +71,19 @@ public class Way {
         }
     }
 
+    @Override
+    public int compareTo(Way way) {
+        return Double.compare(this.closeness, way.getCloseness());
+    }
+
+    public void setSubWay(GeoPoint geoPoint){
+        double dist = Double.MAX_VALUE;
+        int index = 0;
+        for(int i = 0; i < geoPoints.size(); i++){
+            if(dist > geoPoint.distanceToAsDouble(geoPoints.get(i))){
+                index = i;
+            }
+        }
+        this.geoPoints = geoPoints.subList(index, geoPoints.size());
+    }
 }

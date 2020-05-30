@@ -15,6 +15,8 @@ import org.osmdroid.views.overlay.Polygon;
 import org.osmdroid.views.overlay.Polyline;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -123,7 +125,7 @@ public class MapOverpassAdapter extends AsyncTask<ArrayList<GeoPoint>, OverpassQ
                 }
             }
 
-            //ToDO: Wywołać tu wyszukiwanie trasy alternatywnej
+            //Wywołanie wyszukiwania trasy alternatywnej
             findAlternativeRoad();
 
 
@@ -168,12 +170,14 @@ public class MapOverpassAdapter extends AsyncTask<ArrayList<GeoPoint>, OverpassQ
         GeoPoint gp = this.startPoint;
         addAlterPoint(startPoint);
 
+        Collections.sort(wayArray);
+
         int i = 0;
-        while(wholeDistance < this.globalDistance && i <= 100){ // less than 1000m
-            Way w = lookFor(gp);
-            if(w == null){
+        while(wholeDistance < this.globalDistance && i <= 100){
+            if(wayArray.isEmpty()){
                 return false;
             }
+            Way w = lookFor(gp);
             gp = w.getEndPoint();
             wholeDistance += w.getDistance();
             for(GeoPoint g : w.getGeoPoints()){
@@ -225,7 +229,8 @@ public class MapOverpassAdapter extends AsyncTask<ArrayList<GeoPoint>, OverpassQ
         double minDist = Double.MAX_VALUE;
 
         for(Way w : wayArray){
-            double dist = lastPoint.distanceToAsDouble(w.getCenterPoint());
+            double dist = lastPoint.distanceToAsDouble(w.getStartPoint())
+                    + lastPoint.distanceToAsDouble(w.getEndPoint());
             if(dist < minDist) {
                 minDist = dist;
                 closestWay = w;
@@ -233,6 +238,8 @@ public class MapOverpassAdapter extends AsyncTask<ArrayList<GeoPoint>, OverpassQ
         }
 
         wayArray.remove(closestWay);
+
+        closestWay.setSubWay(lastPoint);
 
         return closestWay;
     }
