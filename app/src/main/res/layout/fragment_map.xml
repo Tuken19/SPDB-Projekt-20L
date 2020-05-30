@@ -1,10 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/fragment_map"
-    android:name="com.google.android.gms.maps.SupportMapFragment"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/View_OSM"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.map.MapFragment">
+    android:orientation="vertical">
 
-</fragment>
+    <org.osmdroid.views.MapView
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_wyniki"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="64dp"
+        android:padding="4dp"
+        android:background="@color/colorBG"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/title_best"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/title_best"
+            android:textSize="14sp"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_best_distance"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="@string/text_distance"
+            android:textSize="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title_best" />
+
+        <TextView
+            android:id="@+id/text_best_time"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="@string/text_time"
+            android:textSize="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_best_distance" />
+
+        <TextView
+            android:id="@+id/best_distance"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:textSize="10dp"
+            app:layout_constraintStart_toEndOf="@id/text_best_distance"
+            app:layout_constraintTop_toBottomOf="@id/title_best" />
+
+        <TextView
+            android:id="@+id/best_time"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:textSize="10dp"
+            app:layout_constraintStart_toEndOf="@id/text_best_time"
+            app:layout_constraintTop_toBottomOf="@id/best_distance" />
+
+        <TextView
+            android:id="@+id/title_alt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/title_alternative_1"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@id/best_time" />
+
+        <TextView
+            android:id="@+id/text_alt_distance"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="@string/text_distance"
+            android:textSize="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title_alt" />
+
+        <TextView
+            android:id="@+id/text_alt_time"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="@string/text_time"
+            android:textSize="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_alt_distance" />
+
+        <TextView
+            android:id="@+id/alt_distance"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:textSize="10dp"
+            app:layout_constraintStart_toEndOf="@id/text_alt_distance"
+            app:layout_constraintTop_toBottomOf="@id/title_alt" />
+
+        <TextView
+            android:id="@+id/alt_time"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:textSize="10dp"
+            app:layout_constraintStart_toEndOf="@id/text_alt_time"
+            app:layout_constraintTop_toBottomOf="@id/alt_distance" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

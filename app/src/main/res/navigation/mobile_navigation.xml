@@ -6,14 +6,51 @@
     app:startDestination="@id/nav_map">
 
     <fragment
-        android:id="@+id/nav_home"
-        android:name="com.example.spdb.ui.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home">
+        android:id="@+id/nav_properties"
+        android:name="com.example.spdb.ui.properties.PropertiesFragment"
+        android:label="@string/menu_properties"
+        tools:layout="@layout/fragment_properties">
+        <argument
+            android:name="action_type"
+            app:argType="integer"
+            android:defaultValue="0"/>
 
         <action
-            android:id="@+id/action_HomeFragment_to_MapFragment"
-            app:destination="@id/nav_map" />
+            android:id="@+id/action_PropertiesFragment_to_MapFragment"
+            app:destination="@id/nav_map">
+            <argument
+                android:name="action_type"
+                app:argType="integer"
+                android:defaultValue="0"/>
+        </action>
+
+        <action
+            android:id="@+id/action_add_start_point"
+            app:destination="@id/nav_map">
+            <argument
+                android:name="action_type"
+                app:argType="integer"
+                android:defaultValue="1"/>
+        </action>
+
+        <action
+            android:id="@+id/action_add_end_point"
+            app:destination="@id/nav_map">
+            <argument
+                android:name="action_type"
+                app:argType="integer"
+                android:defaultValue="2"/>
+        </action>
+
+        <action
+            android:id="@+id/action_find_road"
+            app:destination="@id/nav_map">
+            <argument
+                android:name="action_type"
+                app:argType="integer"
+                android:defaultValue="3"/>
+        </action>
+
     </fragment>
 
     <fragment
@@ -23,8 +60,9 @@
         tools:layout="@layout/fragment_map">
 
         <action
-            android:id="@+id/action_MapFragment_to_HomeFragment"
-            app:destination="@id/nav_home" />
+            android:id="@+id/action_MapFragment_to_PropertiesFragment"
+            app:destination="@id/nav_properties" />
+
     </fragment>
 
 </navigation>

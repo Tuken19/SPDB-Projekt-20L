@@ -11,8 +11,19 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <string name="menu_home">Home</string>
+    <string name="menu_properties">Properties</string>
     <string name="menu_map">Map</string>
 
-    <string name="home_second">Home Second</string>
+    <string name="add_start_point">Add start point</string>
+    <string name="add_end_point">Add end point</string>
+    <string name="latitude_text_view">Latitude:</string>
+    <string name="longitude_text_view">Longitude:</string>
+    <string name="set_radius">Set radius:</string>
+    <string name="set_distance">Set min distance:</string>
+    <string name="find_road">Find Road</string>
+
+    <string name="title_best">Best way:</string>
+    <string name="title_alternative_1">Alternative way:</string>
+    <string name="text_distance">Distance:</string>
+    <string name="text_time">Time</string>
 </resources>
