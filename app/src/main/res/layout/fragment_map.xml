@@ -16,95 +16,211 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="64dp"
-        android:padding="4dp"
+        android:layout_marginBottom="72dp"
         android:background="@color/colorBG"
+        android:padding="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <TextView
-            android:id="@+id/title_best"
-            android:layout_width="match_parent"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_best"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/title_best"
-            android:textSize="14sp"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/text_best_distance"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:text="@string/text_distance"
-            android:textSize="10dp"
+            android:background="@color/colorBestWayFill"
+            android:padding="4dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title_best" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/text_best_time"
-            android:layout_width="50dp"
+            <!--Best Way-->
+            <TextView
+                android:id="@+id/title_best"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/title_best"
+                android:textSize="14sp"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/text_best_distance"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:text="@string/text_distance"
+                android:textSize="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title_best" />
+
+            <TextView
+                android:id="@+id/text_best_time"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:text="@string/text_time"
+                android:textSize="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_best_distance" />
+
+            <TextView
+                android:id="@+id/best_distance"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:textSize="10dp"
+                app:layout_constraintStart_toEndOf="@id/text_best_distance"
+                app:layout_constraintTop_toBottomOf="@id/title_best" />
+
+            <TextView
+                android:id="@+id/best_time"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:textSize="10dp"
+                app:layout_constraintStart_toEndOf="@id/text_best_time"
+                app:layout_constraintTop_toBottomOf="@id/best_distance" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_alt1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/text_time"
-            android:textSize="10dp"
+            android:layout_marginTop="4dp"
+            android:background="@color/colorAlternativeWayFill"
+            android:padding="4dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_best_distance" />
+            app:layout_constraintTop_toBottomOf="@id/layout_best">
 
-        <TextView
-            android:id="@+id/best_distance"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:textSize="10dp"
-            app:layout_constraintStart_toEndOf="@id/text_best_distance"
-            app:layout_constraintTop_toBottomOf="@id/title_best" />
+            <!--Alt Way 1-->
+            <TextView
+                android:id="@+id/title_alt1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/title_alternative_1"
+                android:textSize="14sp"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/best_time"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:textSize="10dp"
-            app:layout_constraintStart_toEndOf="@id/text_best_time"
-            app:layout_constraintTop_toBottomOf="@id/best_distance" />
+            <TextView
+                android:id="@+id/text_alt_distance1"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:text="@string/text_distance"
+                android:textSize="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title_alt1" />
 
-        <TextView
-            android:id="@+id/title_alt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/title_alternative_1"
-            android:textSize="14sp"
-            app:layout_constraintTop_toBottomOf="@id/best_time" />
+            <TextView
+                android:id="@+id/text_alt_time1"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:text="@string/text_time"
+                android:textSize="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_alt_distance1" />
 
-        <TextView
-            android:id="@+id/text_alt_distance"
-            android:layout_width="50dp"
+            <TextView
+                android:id="@+id/text_alt_sections1"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:text="@string/title_sections_distance"
+                android:textSize="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_alt_time1" />
+
+            <TextView
+                android:id="@+id/alt_distance1"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:textSize="10dp"
+                app:layout_constraintStart_toEndOf="@id/text_alt_distance1"
+                app:layout_constraintTop_toBottomOf="@id/title_alt1" />
+
+            <TextView
+                android:id="@+id/alt_time1"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:textSize="10dp"
+                app:layout_constraintStart_toEndOf="@id/text_alt_time1"
+                app:layout_constraintTop_toBottomOf="@id/alt_distance1" />
+
+            <TextView
+                android:id="@+id/alt_sections1"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:textSize="10dp"
+                app:layout_constraintStart_toEndOf="@id/text_alt_sections1"
+                app:layout_constraintTop_toBottomOf="@id/alt_time1" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_alt2"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/text_distance"
-            android:textSize="10dp"
+            android:layout_marginTop="4dp"
+            android:background="@color/colorAlternativeWayFill2"
+            android:padding="4dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title_alt" />
+            app:layout_constraintTop_toBottomOf="@id/layout_alt1">
 
-        <TextView
-            android:id="@+id/text_alt_time"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:text="@string/text_time"
-            android:textSize="10dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_alt_distance" />
+            <!--Alt Way 2-->
+            <TextView
+                android:id="@+id/title_alt2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/title_alternative_2"
+                android:textSize="14sp"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/alt_distance"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:textSize="10dp"
-            app:layout_constraintStart_toEndOf="@id/text_alt_distance"
-            app:layout_constraintTop_toBottomOf="@id/title_alt" />
+            <TextView
+                android:id="@+id/text_alt_distance2"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:text="@string/text_distance"
+                android:textSize="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/title_alt2" />
 
-        <TextView
-            android:id="@+id/alt_time"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:textSize="10dp"
-            app:layout_constraintStart_toEndOf="@id/text_alt_time"
-            app:layout_constraintTop_toBottomOf="@id/alt_distance" />
+            <TextView
+                android:id="@+id/text_alt_time2"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:text="@string/text_time"
+                android:textSize="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_alt_distance2" />
+
+            <TextView
+                android:id="@+id/text_alt_sections2"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:text="@string/title_sections_distance"
+                android:textSize="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_alt_time2" />
+
+            <TextView
+                android:id="@+id/alt_distance2"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:textSize="10dp"
+                app:layout_constraintStart_toEndOf="@id/text_alt_distance2"
+                app:layout_constraintTop_toBottomOf="@id/title_alt2" />
+
+            <TextView
+                android:id="@+id/alt_time2"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:textSize="10dp"
+                app:layout_constraintStart_toEndOf="@id/text_alt_time2"
+                app:layout_constraintTop_toBottomOf="@id/alt_distance2" />
+
+            <TextView
+                android:id="@+id/alt_sections2"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:textSize="10dp"
+                app:layout_constraintStart_toEndOf="@id/text_alt_sections2"
+                app:layout_constraintTop_toBottomOf="@id/alt_time2" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

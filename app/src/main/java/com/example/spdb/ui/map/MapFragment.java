@@ -3,9 +3,7 @@ package com.example.spdb.ui.map;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.location.Location;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
@@ -18,19 +16,16 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import hu.supercluster.overpasser.adapter.OverpassQueryResult;
-import hu.supercluster.overpasser.adapter.OverpassQueryResult.Element;
 
-import com.example.spdb.MainActivity;
 import com.example.spdb.MapActivity;
 import com.example.spdb.R;
 import com.example.spdb.RoadFinder;
-import com.example.spdb.MapOverpassAdapter;
 import com.example.spdb.ui.properties.PropertiesFragmentArgs;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -39,15 +34,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 
 import org.osmdroid.api.IMapController;
-import org.osmdroid.bonuspack.routing.Road;
 import org.osmdroid.config.Configuration;
 import org.osmdroid.events.MapEventsReceiver;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
-import org.osmdroid.util.BoundingBox;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.MapEventsOverlay;
-import org.osmdroid.views.overlay.Marker;
+import org.osmdroid.views.overlay.Overlay;
 import org.osmdroid.views.overlay.Polygon;
 import org.osmdroid.views.overlay.compass.CompassOverlay;
 import org.osmdroid.views.overlay.compass.InternalCompassOrientationProvider;
@@ -55,6 +48,8 @@ import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider;
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 import static com.example.spdb.MapActivity.getEndPoint;
 import static com.example.spdb.MapActivity.getStartPoint;
@@ -77,8 +72,18 @@ public class MapFragment extends Fragment {
 
     private static TextView tvBestDistance;
     private static TextView tvBestTime;
-    private static TextView tvAltDistance;
-    private static TextView tvAltTime;
+    private static TextView tvAltDistance1;
+    private static TextView tvAltTime1;
+    private static TextView tvAltSections1;
+    private static TextView tvAltDistance2;
+    private static TextView tvAltTime2;
+    private static TextView tvAltSections2;
+
+    private static List<Overlay> listOfRoads;
+
+    private ConstraintLayout layoutBest;
+    private ConstraintLayout layoutAlt1;
+    private ConstraintLayout layoutAlt2;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -109,6 +114,8 @@ public class MapFragment extends Fragment {
         mapView = view.findViewById(R.id.map);
         mapView.setTileSource(TileSourceFactory.MAPNIK);
 
+        listOfRoads = new LinkedList<>();
+
         // ===== My Location Overlay =====
         mapView.setMultiTouchControls(true);
         locationOverlay = new MyLocationNewOverlay(new GpsMyLocationProvider(this.getContext()), mapView);
@@ -123,8 +130,16 @@ public class MapFragment extends Fragment {
         // ===== Ways info =====
         tvBestDistance = view.findViewById(R.id.best_distance);
         tvBestTime = view.findViewById(R.id.best_time);
-        tvAltDistance = view.findViewById(R.id.alt_distance);
-        tvAltTime = view.findViewById(R.id.alt_time);
+        tvAltDistance1 = view.findViewById(R.id.alt_distance1);
+        tvAltTime1 = view.findViewById(R.id.alt_time1);
+        tvAltSections1 = view.findViewById(R.id.alt_sections1);
+        tvAltDistance2 = view.findViewById(R.id.alt_distance2);
+        tvAltTime2 = view.findViewById(R.id.alt_time2);
+        tvAltSections2 = view.findViewById(R.id.alt_sections2);
+        layoutBest = view.findViewById(R.id.layout_best);
+        layoutAlt1 = view.findViewById(R.id.layout_alt1);
+        layoutAlt2 = view.findViewById(R.id.layout_alt2);
+
 
         if (getArguments() != null) {// to avoid the NullPointerException
             int actionType = PropertiesFragmentArgs.fromBundle(getArguments()).getActionType();
@@ -142,6 +157,10 @@ public class MapFragment extends Fragment {
         updateLocationUI();
         drawStartPoint(getStartPoint());
         drawEndPoint(getEndPoint());
+
+        bestOnOff();
+        alt1OnOff();
+        alt2OnOff();
     }
 
     @Override
@@ -317,7 +336,7 @@ public class MapFragment extends Fragment {
     private void drawStartPoint(GeoPoint startPoint){
         if(startPoint != null) {
             Polygon polygon = new Polygon();
-            ArrayList<GeoPoint> circlePoints = Polygon.pointsAsCircle(startPoint, 5);
+            ArrayList<GeoPoint> circlePoints = Polygon.pointsAsCircle(startPoint, 10);
             polygon.setPoints(circlePoints);
             polygon.getFillPaint().setColor(getResources().getColor(R.color.colorStartFill));
             polygon.setStrokeColor(getResources().getColor(R.color.colorStart));
@@ -328,7 +347,7 @@ public class MapFragment extends Fragment {
     private void drawEndPoint(GeoPoint endPoint){
         if(endPoint != null) {
             Polygon polygon = new Polygon();
-            ArrayList<GeoPoint> circlePoints = Polygon.pointsAsCircle(endPoint, 5);
+            ArrayList<GeoPoint> circlePoints = Polygon.pointsAsCircle(endPoint, 10);
             polygon.setPoints(circlePoints);
             polygon.getFillPaint().setColor(getResources().getColor(R.color.colorEndFill));
             polygon.setStrokeColor(getResources().getColor(R.color.colorEnd));
@@ -353,11 +372,91 @@ public class MapFragment extends Fragment {
         tvBestTime.setText(bestTime);
     }
 
-    public static void setTvAltDistanceText(String altDistance) {
-        tvAltDistance.setText(altDistance);
+    public static void setTvAltDistanceText1(String altDistance) {
+        tvAltDistance1.setText(altDistance);
     }
 
-    public static void setTvAltTimeText(String altTime) {
-        tvAltTime.setText(altTime);
+    public static void setTvAltTimeText1(String altTime) {
+        tvAltTime1.setText(altTime);
+    }
+
+    public static void setTvAltDistanceText2(String altDistance) {
+        tvAltDistance2.setText(altDistance);
+    }
+
+    public static void setTvAltTimeText2(String altTime) {
+        tvAltTime2.setText(altTime);
+    }
+
+    public static void setTvAltSections1(String altSections){
+        tvAltSections1.setText(altSections);
+    }
+
+    public static void setTvAltSections2(String altSections){
+        tvAltSections2.setText(altSections);
+    }
+
+    public static void addToListOfRoads(Overlay road){
+        listOfRoads.add(road);
+    }
+
+    private void bestOnOff(){
+        layoutBest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int size = listOfRoads.size();
+                if( size == 3){
+                    Overlay bestMap = listOfRoads.get(0);
+                    if(bestMap.isEnabled()){
+                        bestMap.setEnabled(false);
+                        layoutBest.setBackgroundColor(getResources().getColor(R.color.transparent));
+                    }
+                    else {
+                        bestMap.setEnabled(true);
+                        layoutBest.setBackgroundColor(getResources().getColor(R.color.colorBestWayFill));
+                    }
+                }
+            }
+        });
+    }
+
+    private void alt1OnOff(){
+        layoutAlt1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int size = listOfRoads.size();
+                if( size == 3){
+                    Overlay altMap1 = listOfRoads.get(1);
+                    if(altMap1.isEnabled()){
+                        altMap1.setEnabled(false);
+                        layoutAlt1.setBackgroundColor(getResources().getColor(R.color.transparent));
+                    }
+                    else {
+                        altMap1.setEnabled(true);
+                        layoutAlt1.setBackgroundColor(getResources().getColor(R.color.colorAlternativeWayFill));
+                    }
+                }
+            }
+        });
+    }
+
+    private void alt2OnOff(){
+        layoutAlt2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int size = listOfRoads.size();
+                if( size == 3){
+                    Overlay altMap2 = listOfRoads.get(2);
+                    if(altMap2.isEnabled()){
+                        altMap2.setEnabled(false);
+                        layoutAlt2.setBackgroundColor(getResources().getColor(R.color.transparent));
+                    }
+                    else {
+                        altMap2.setEnabled(true);
+                        layoutAlt2.setBackgroundColor(getResources().getColor(R.color.colorAlternativeWayFill2));
+                    }
+                }
+            }
+        });
     }
 }

@@ -32,14 +32,13 @@ import static com.example.spdb.ui.map.MapFragment.getMapView;
 public class MapActivity extends AppCompatActivity {
 
     public static final String BEST_ROAD = "BestRoad";
-    public static final String ALTERNATIVE_ROAD = "AlternativeRoad";
+    public static final String ALTERNATIVE_ROAD_1 = "AlternativeRoad1";
+    public static final String ALTERNATIVE_ROAD_2 = "AlternativeRoad2";
 
     private AppBarConfiguration mAppBarConfiguration;
     Toolbar toolbar;
     DrawerLayout drawer;
     NavigationView navigationView;
-
-    Fragment mapFragment;
 
     private static MapView mapView;
     private FloatingActionButton fabCenter;
@@ -48,8 +47,6 @@ public class MapActivity extends AppCompatActivity {
     private static GeoPoint endPoint = null;
     private static int radius = 100;
     private static int globalDistance = 1000;
-
-    public static FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){

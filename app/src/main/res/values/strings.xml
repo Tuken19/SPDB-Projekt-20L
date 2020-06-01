@@ -23,7 +23,9 @@
     <string name="find_road">Find Road</string>
 
     <string name="title_best">Best way:</string>
-    <string name="title_alternative_1">Alternative way:</string>
+    <string name="title_alternative_1">Alternative way 1:</string>
+    <string name="title_alternative_2">Alternative way 2:</string>
     <string name="text_distance">Distance:</string>
-    <string name="text_time">Time</string>
+    <string name="text_time">Time:</string>
+    <string name="title_sections_distance">Sections:</string>
 </resources>

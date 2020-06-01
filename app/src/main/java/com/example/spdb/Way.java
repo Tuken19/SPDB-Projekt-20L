@@ -26,7 +26,7 @@ public class Way implements Comparable<Way>{
     }
 
     public double getDistance() {
-        return distance;
+        return calculateDistance(geoPoints);
     }
 
     public List<GeoPoint> getGeoPoints() {
@@ -81,9 +81,11 @@ public class Way implements Comparable<Way>{
         int index = 0;
         for(int i = 0; i < geoPoints.size(); i++){
             if(dist > geoPoint.distanceToAsDouble(geoPoints.get(i))){
+                dist = geoPoint.distanceToAsDouble(geoPoints.get(i));
                 index = i;
             }
         }
         this.geoPoints = geoPoints.subList(index, geoPoints.size());
+        System.out.println("SIZE: " + geoPoints.size());
     }
 }

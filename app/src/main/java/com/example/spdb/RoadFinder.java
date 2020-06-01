@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import com.example.spdb.ui.map.MapFragment;
-import com.google.android.material.snackbar.Snackbar;
 
 import org.osmdroid.bonuspack.routing.GraphHopperRoadManager;
 import org.osmdroid.bonuspack.routing.Road;
@@ -50,9 +49,6 @@ public class RoadFinder extends AsyncTask<String, Road[], Road[]> {
         this.waypoints = wayPoints;
     }
 
-    public void clear() {
-        waypoints.clear();
-    }
 
     @Override
     protected Road[] doInBackground(String[] params) {
@@ -79,19 +75,26 @@ public class RoadFinder extends AsyncTask<String, Road[], Road[]> {
             roadOverlay = RoadManager.buildRoadOverlay(road);
             MapFragment.setTvBestDistanceText(convertDistance(road.mLength));
             MapFragment.setTvBestTimeText(convertTime(road.mDuration));
+            MapFragment.addToListOfRoads(roadOverlay);
 
         }
-        else{
-            // Wyświetlenie trasy alternatywnej
+        else if(parameters[1].equals(MapActivity.ALTERNATIVE_ROAD_1)){
+            // Wyświetlenie trasy alternatywnej 1
             roadOverlay = RoadManager.buildRoadOverlay(road, context.getResources().getColor(R.color.colorAlternativeWayFill), 10);
-            MapFragment.setTvAltDistanceText(convertDistance(road.mLength));
-            MapFragment.setTvAltTimeText(convertTime(road.mDuration));
+            MapFragment.setTvAltDistanceText1(convertDistance(road.mLength));
+            MapFragment.setTvAltTimeText1(convertTime(road.mDuration));
+            MapFragment.addToListOfRoads(roadOverlay);
+        }
+        else{
+            // Wyświetlenie trasy alternatywnej 2
+            roadOverlay = RoadManager.buildRoadOverlay(road, context.getResources().getColor(R.color.colorAlternativeWayFill2), 10);
+            MapFragment.setTvAltDistanceText2(convertDistance(road.mLength));
+            MapFragment.setTvAltTimeText2(convertTime(road.mDuration));
+            MapFragment.addToListOfRoads(roadOverlay);
         }
 
         mapView.getOverlays().add(roadOverlay);
         mapView.invalidate();
-        String lengthAndTime = road.getLengthDurationText(context, -1);
-        Snackbar.make(mapView, lengthAndTime, Snackbar.LENGTH_SHORT).show();
     }
 
     private ArrayList<GeoPoint> getRoadPoints(Road road) {
@@ -107,6 +110,7 @@ public class RoadFinder extends AsyncTask<String, Road[], Road[]> {
     private void fetchPoints(ArrayList<GeoPoint> geoPoints) {
         MapOverpassAdapter mapOverpassAdapter = new MapOverpassAdapter(context, mapView);
         mapOverpassAdapter.setRadius(radius);
+        mapOverpassAdapter.setAlgorhitm(MapActivity.ALTERNATIVE_ROAD_1);
         mapOverpassAdapter.setGlobalDistance(globalDistance);
         mapOverpassAdapter.execute(geoPoints);
     }

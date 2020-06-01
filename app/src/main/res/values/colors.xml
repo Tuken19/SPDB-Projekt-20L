@@ -11,9 +11,13 @@
     <color name="colorEndFill">#50DD2C00</color>
     <color name="colorPOI">#FF6D00</color>
     <color name="colorPOIFill">#50FF6D00</color>
-    <color name="colorWayPoint">#C51162</color>
-    <color name="colorWayPointFill">#50C51162</color>
-    <color name="colorAlternativeWay">#FFAB00</color>
-    <color name="colorAlternativeWayFill">#50FFAB00</color>
+    <color name="colorWayPoint">#20FFAB00</color>
+    <color name="colorWayPointFill">#50FFAB00</color>
+    <color name="colorAlternativeWay">#C51162</color>
+    <color name="colorAlternativeWayFill">#50C51162</color>
+    <color name="colorAlternativeWay2">#00C853</color>
+    <color name="colorAlternativeWayFill2">#5000C853</color>
+    <color name="colorBestWayFill">#502962FF</color>
     <color name="colorBG">#70000000</color>
+    <color name="transparent">#10000000</color>
 </resources>
