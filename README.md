@@ -4,7 +4,10 @@
 ### Wstęp
 Celem projektu była implementacja aplikacji mobilnej do wyznaczania najlepszej trasy wg zadanych parametrów. Podstawową opcją dostępną dla użytkownika miała być możliwość wyboru najlepszej trasy ze względu na jej całkowity dystans. Ponadto aplikacja wyszukuje trasy zawierające zadaną minimalną długość tzw. “odcinków widokowych”.
 
-### 
+### Architektura rozwiązania
+Aplikacja składa się z dwóch activities.
+- Pierwszym jest ekran powitalny widoczny po uruchomieniu aplikacji zawierający przycisk, który przekierowuje do głównego okna.
+- Drugie to activity z left navigation drawer. Możliwe jest przełączanie się między widokiem mapy, z aktualnym położeniem użytkownika, a ekranem z opcjami trasy. Można tam zdefiniować jej początek oraz koniec, a także minimalną długość “odcinków widokowych".
 
 ### Zastosowane narzędzia
 - Aplikacja została stworzona na urządzenia mobilne z systemem Android.
