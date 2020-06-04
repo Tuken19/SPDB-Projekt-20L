@@ -14,4 +14,5 @@ Celem projektu była implementacja aplikacji mobilnej do wyznaczania najlepszej 
 - Do znajdowania optymalnych tras pomiędzy zestawem punktów zastosowano GraphHopper Directions API.
 - Do tworzenia oraz wysyłania zapytań do bazy Overpass API wykorzystano bibliotekę Overpasser.
 
-![Main](Screenshots/Main.jpg)
+### Zrzuty ekranu
+|![Main](Screenshots/Main.jpg)|![Map](Screenshots/Map.jpg)|![Menu](Screenshots/Menu.jpg)|![Properties](Screenshots/Properties.jpg)|![Ways](Screenshots/Ways.jpg)
