@@ -24,10 +24,10 @@ Celem projektu była implementacja aplikacji mobilnej do wyznaczania najlepszej 
     <td>Map with ways</td>
   </tr>
   <tr>
-    <td><img src="Screenshots/Main.jpg" width=270 height=480></td>
-    <td><img src="Screenshots/Map.jpg" width=270 height=480></td>
-    <td><img src="Screenshots/Menu.jpg" width=270 height=480></td>
-    <td><img src="Screenshots/Properties.jpg" width=270 height=480></td>
-    <td><img src="Screenshots/Ways.jpg" width=270 height=480></td>
+    <td><img src="Screenshots/Main.jpg" width=270></td>
+    <td><img src="Screenshots/Map.jpg" width=270></td>
+    <td><img src="Screenshots/Menu.jpg" width=270></td>
+    <td><img src="Screenshots/Properties.jpg" width=270></td>
+    <td><img src="Screenshots/Ways.jpg" width=270></td>
   </tr>
  </table>
