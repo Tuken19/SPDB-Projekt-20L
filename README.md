@@ -29,6 +29,7 @@ Aplikacja składa się z dwóch activities.
  
 ### Algorytmy
 W aplikacji zastosowano dwa algorytmy.
+
 **Pierwszy algorytm:**
 1. Znalezienie trasy optymalnej od zadanego startu do końca trasy bez odcinków widokowych.
 2. Znalezienie odcinków widokowych w odległości r od podstawowej trasy. 
